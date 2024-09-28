@@ -36,6 +36,7 @@ public class TestStore {
         WebElement inputPassword = driver.findElement(By.xpath("//div[@class='col-md-6 js-input-column']//input[@id='field-password']"));
         WebElement inputTermsAndCond = driver.findElement(By.xpath("//span[@class='custom-checkbox']//input[@required]"));
 
+        inputSocialTitle.click();
         inputFirstName.sendKeys("Test");
         inputLastName.sendKeys("Testington");
         inputEmail.sendKeys("test"+ System.currentTimeMillis()+"@testing.com");
@@ -50,7 +51,7 @@ public class TestStore {
                 By.xpath("//div[@class='user-info']//a[@class='account']//span[@class='hidden-sm-down']")
         ));
         String accountName = name.getText();
-        assert accountName.equals("Test Testington");
+        assertEquals(accountName,"Test Testington");
     }
 
     @AfterEach
