@@ -10,10 +10,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
@@ -27,7 +32,7 @@ public class UserTest {
     @BeforeEach
     public void setup() {
         RestAssured.baseURI = baseUrl;
-        username = "user_damesaa" + Instant.now().getEpochSecond();
+        username = "user_" + Instant.now().getEpochSecond();
     }
 
     @Test
@@ -55,8 +60,17 @@ public class UserTest {
                 .extract().response();
 
         userId = response.path("userID");
+
+        // Assert to validate that the userID is not null or empty
+        assertTrue(userId != null && !userId.isEmpty(), "User ID should not be null or empty after user creation");
+
+        // Optional: Validate additional fields if available
+        List<Objects> booksValidation = response.path("books");
+        assertEquals( 0, booksValidation.size());
+
         System.out.println("User created with ID: " + userId);
     }
+
 
     private void setupWebDriver() {
         driver = new ChromeDriver();
