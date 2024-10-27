@@ -8,6 +8,28 @@
 	"item": [
 		{
 			"name": "Astronomy Picture of the Day (APOD)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains 'url'\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property('url');",
+							"});",
+							"",
+							"pm.test(\"Date is as expected\", function () {",
+							"    pm.expect(pm.response.json().date).to.eql(\"2024-10-01\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
