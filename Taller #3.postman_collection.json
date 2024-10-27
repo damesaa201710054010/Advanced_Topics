@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "888a6b7b-830f-4c88-bb79-aaf56cd2cbe2",
+		"name": "Taller #3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8515750"
+	},
+	"item": [
+		{
+			"name": "Astronomy Picture of the Day (APOD)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?api_key={{YOUR_API_KEY}}&date={{date}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{YOUR_API_KEY}}"
+						},
+						{
+							"key": "date",
+							"value": "{{date}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mars Rover Photos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?{{location}}={{location_number}}&api_key={{YOUR_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"mars-photos",
+						"api",
+						"v1",
+						"rovers",
+						"curiosity",
+						"photos"
+					],
+					"query": [
+						{
+							"key": "{{location}}",
+							"value": "{{location_number}}"
+						},
+						{
+							"key": "api_key",
+							"value": "{{YOUR_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NeoWs (Near Earth Object Web Service)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/neo/rest/v1/feed?start_date={{start_date}}&end_date={{end_date}}&api_key={{YOUR_API_KEY}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"neo",
+						"rest",
+						"v1",
+						"feed"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "{{start_date}}"
+						},
+						{
+							"key": "end_date",
+							"value": "{{end_date}}"
+						},
+						{
+							"key": "api_key",
+							"value": "{{YOUR_API_KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "YOUR_API_KEY",
+			"value": "yQgz0pyLlOQkpYbjGOTS9dstJfIpIipkr7QZsYQT",
+			"type": "string"
+		},
+		{
+			"key": "date",
+			"value": "2024-10-01",
+			"type": "string"
+		},
+		{
+			"key": "location",
+			"value": "sol",
+			"type": "string"
+		},
+		{
+			"key": "location_number",
+			"value": "1000",
+			"type": "string"
+		},
+		{
+			"key": "start_date",
+			"value": "2024-10-01",
+			"type": "string"
+		},
+		{
+			"key": "end_date",
+			"value": "2024-10-07",
+			"type": "string"
+		}
+	]
+}
