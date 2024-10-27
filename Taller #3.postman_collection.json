@@ -22,7 +22,7 @@
 							"});",
 							"",
 							"pm.test(\"Date is as expected\", function () {",
-							"    pm.expect(pm.response.json().date).to.eql(\"2024-10-01\");",
+							"    pm.expect(pm.response.json().date).to.eql(pm.collectionVariables.get(\"date\"));",
 							"});"
 						],
 						"type": "text/javascript",
@@ -61,6 +61,31 @@
 		},
 		{
 			"name": "Mars Rover Photos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains 'photos'\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('photos');",
+							"    pm.expect(jsonData.photos).to.be.an('array');",
+							"});",
+							"",
+							"pm.test(\"At least one photo is returned\", function () {",
+							"    pm.expect(pm.response.json().photos.length).to.be.above(0);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -96,6 +121,41 @@
 		},
 		{
 			"name": "NeoWs (Near Earth Object Web Service)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response contains 'near_earth_objects'\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('near_earth_objects');",
+							"});",
+							"",
+							"pm.test(\"Data is available for each date in the range\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const startDate = new Date(pm.collectionVariables.get(\"start_date\"));",
+							"    const endDate = new Date(pm.collectionVariables.get(\"end_date\"));",
+							"    let datesInRange = [];",
+							"",
+							"    // Generar las fechas del rango",
+							"    for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {",
+							"        datesInRange.push(date.toISOString().split('T')[0]);",
+							"    }",
+							"",
+							"    // Verificar que todas las fechas estén presentes",
+							"    pm.expect(Object.keys(jsonData.near_earth_objects)).to.include.members(datesInRange);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
